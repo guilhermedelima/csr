@@ -21,9 +21,9 @@ Depois de produzir os textos cifrados com os tres métodos de cifração (com ch
 
 1. Desenvolva as suas próprias ferramentas ou use ferramentas ou scripts disponíveis para criptoanalizar os textos cifrados.
 
-2.Tente obter o texto em claro a partir do texto cifrado.
+2. Tente obter o texto em claro a partir do texto cifrado.
 
-3.Tente obter a chave ou o alfabeto utilizado.
+3. Tente obter a chave ou o alfabeto utilizado.
 
 O que você precisa entregar:
 
