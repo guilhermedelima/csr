@@ -25,9 +25,9 @@ Depois de produzir os textos cifrados com os tres métodos de cifração (com ch
 
 O que você precisa entregar:
 
-*Um programa que produza textos cifrados usando cada um dos tres métodos acima. A entrada para o programa será um arquivo texto contendo o texto em claro e um outro arquivo texto contendo a chave para cifração. A saída deverá ser um arquivo contendo o texto cifrado.
-*Um programa para produzir textos em claro usando cada um dos tres métodos acima. A entrada para o programa será um arquivo texto contendo o texto cifrado e um outro arquivo texto contendo a chave para decifração. A saída deverá ser um arquivo contendo o texto em claro obtido da decifração.
-*Um programa para quebrar os cifradores que utilizem de cada método de cifração. A entrada para este programa será um arquivo contendo o texto cifrado e, possivelmente, um outro arquivo texto contendo uma lista de palavras que devem estar presentes no texto em claro. A saída deverá ser um arquivo contendo o texto em claro e outro contendo a chave.
+* Um programa que produza textos cifrados usando cada um dos tres métodos acima. A entrada para o programa será um arquivo texto contendo o texto em claro e um outro arquivo texto contendo a chave para cifração. A saída deverá ser um arquivo contendo o texto cifrado.
+* Um programa para produzir textos em claro usando cada um dos tres métodos acima. A entrada para o programa será um arquivo texto contendo o texto cifrado e um outro arquivo texto contendo a chave para decifração. A saída deverá ser um arquivo contendo o texto em claro obtido da decifração.
+* Um programa para quebrar os cifradores que utilizem de cada método de cifração. A entrada para este programa será um arquivo contendo o texto cifrado e, possivelmente, um outro arquivo texto contendo uma lista de palavras que devem estar presentes no texto em claro. A saída deverá ser um arquivo contendo o texto em claro e outro contendo a chave.
 
 
 ### Exercicio 2
