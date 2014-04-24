@@ -1,40 +1,41 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 #include "Cipher.hpp"
 
 using namespace std;
 
 int main(int argc, char *argv[]){
     
-    ifstream itext;
-    ifstream ikey;
-    
+	ifstream itext;
+	ifstream ikey;
+
 	string key;
 	string text;
 	string cripto;
-    
-    if(argc != 3){
-       key = "CHAVEVERNAMCRIPTOGRAFIA";
-	   text = "Texto Em claro para cifracao ANO 2014";
-    } else {
-        itext.open(argv[1]);
-        ikey.open(argv[2]);
-        
-        getline(ikey,key);
-        getline(itext,text);
 
-        itext.close();
-        ikey.close();
-    }
-    
+	if( argc != 3 ){
+		cout << "Correct Usage: " << argv[0] << " <TEXT_FILE> <KEY_FILE>" << endl;
+		exit(-1);
+	}
+
+	itext.open(argv[1]);
+	ikey.open(argv[2]);
+
+	getline(ikey,key);
+	getline(itext,text);
+
+	itext.close();
+	ikey.close();
+
 	VigenereCipher cipher(key);
-	
+
 	cripto = cipher.cipherText(text);
 
-	cout << text << endl << endl;
-	cout << cripto << endl << endl;
-	cout << cipher.decodeText(cripto) << endl;
+	cout << "PLAIN TEXT" << endl << text << endl << endl;
+	cout << "CRIPTO" << endl << cripto << endl << endl;
+	cout << "DECRYPTED TEXT" << endl << cipher.decodeText(cripto) << endl;
 
 	return 0;
 }

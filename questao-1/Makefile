@@ -2,6 +2,7 @@ SRCDIR=src
 BINDIR=bin
 INCDIR=include
 OBJDIR=obj
+RSCDIR=resources
 
 CC=g++
 CFLAGS=-W -Wall -pedantic -ansi -I $(INCDIR)
@@ -31,4 +32,5 @@ clean:
 	@ rm -f $(BINDIR)/*
 	@ rm -f $(SRCDIR)/*~
 	@ rm -f $(INCDIR)/*~
-
+	@ rm -f $(INCDIR)/*~
+	@ rm -f $(RSCDIR)/*~
