@@ -44,7 +44,7 @@ string VigenereCipher::cipherText(const string& text) const{
 	key_size = (int) this->key.size();
 
 	for(i=0; i<(int)text.size(); i++){
-		cripto[i] = text[i] ^ this->key[i%key_size];
+		cripto[i] = dictionary[(getDictionaryPosition(text[i]) + getDictionaryPosition(key[i%key_size]))%DICTIONARY_SIZE];
 	}
 
 	return cripto;
@@ -52,7 +52,16 @@ string VigenereCipher::cipherText(const string& text) const{
 
 
 string VigenereCipher::decodeText(const string& cripto) const{
-	return this->cipherText(cripto);
+	int i, key_size;
+	string _cripto(cripto);
+
+	key_size = (int) this->key.size();
+
+	for(i=0; i<(int)cripto.size(); i++){
+		_cripto[i] = dictionary[getDictionaryPosition(cripto[i]) - getDictionaryPosition(key[i%key_size])];
+	}
+
+	return _cripto;
 }
 
 
