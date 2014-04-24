@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "cipher.hpp"
+#include "Cipher.hpp"
 
 using namespace std;
 
@@ -11,9 +11,9 @@ int main(void){
 	string cripto;
 
 	key = "CHAVEVERNAMCRIPTOGRAFIA";
-	text = "Texto Em claro para cifracao ANO 2014";
+	text = "Texto Em claro para cifracao ANO 2014\nBLABLADLDLFMDLKMFKÇSDFMKLDFNK\nGHLSJDGBHLDJSGHDJS";
 
-	VernamCipher cipher(key);
+	VigenereCipher cipher(key);
 	
 	cripto = cipher.cipherText(text);
 

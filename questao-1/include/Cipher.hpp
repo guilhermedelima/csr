@@ -1,5 +1,6 @@
 #ifndef CIPHER_HPP
 #define CIPHER_HPP
+
 #include <string>
 
 using namespace std;
@@ -13,14 +14,8 @@ class Cipher{
 		virtual string decodeText(const string& cripto) const = 0;
 };
 
-
-class VernamCipher : Cipher{
-	public:
-		VernamCipher(string key);
-		string cipherText(const string& text) const;
-		string decodeText(const string& cripto) const;
-};
-
-
+#include "VigenereCipher.hpp"
+#include "TranspositionCipher.hpp"
+#include "Util.hpp"
 
 #endif

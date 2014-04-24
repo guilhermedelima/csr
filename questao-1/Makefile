@@ -8,8 +8,8 @@ CFLAGS=-W -Wall -pedantic -ansi -I $(INCDIR)
 
 TARGET=cipher
 
-_HEADER=cipher.hpp
-_OBJ=cipher.o test_cipher.o
+_HEADER=$(foreach header,$(shell ls $(INCDIR)),$(header))
+_OBJ=$(_HEADER:.hpp=.o) test_cipher.o
 
 HEADER=$(patsubst %,$(INCDIR)/%,$(_HEADER))
 OBJ=$(patsubst %,$(OBJDIR)/%,$(_OBJ))
@@ -25,11 +25,10 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HEADER)
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $^
 
-
 clean:
-	rm -f *~ *.out
-	rm -f $(OBJDIR)/*
-	rm -f $(BINDIR)/*
-	rm -f $(SRCDIR)/*~
-	rm -f $(INCDIR)/*~
+	@ rm -f *~ *.out
+	@ rm -f $(OBJDIR)/*
+	@ rm -f $(BINDIR)/*
+	@ rm -f $(SRCDIR)/*~
+	@ rm -f $(INCDIR)/*~
 
