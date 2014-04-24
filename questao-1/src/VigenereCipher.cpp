@@ -28,8 +28,12 @@ const int VigenereCipher::DICTIONARY_SIZE = 63;
 
 int VigenereCipher::getDictionaryPosition(char letter) const{
 
+    for(int i=0;;i++){
+        if(this->dictionary[i] == letter)
+            return i;
+    }
 
-	return 0;
+	return -1;
 }
 
 string VigenereCipher::cipherText(const string& text) const{
