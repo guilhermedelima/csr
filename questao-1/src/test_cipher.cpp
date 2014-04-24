@@ -25,6 +25,9 @@ int main(int argc, char *argv[]){
         
         getline(ikey,key);
         getline(itext,text);
+
+        itext.close();
+        ikey.close();
     }
     
 	VernamCipher cipher(key);
