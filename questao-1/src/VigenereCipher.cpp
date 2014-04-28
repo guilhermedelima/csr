@@ -28,47 +28,43 @@ const int VigenereCipher::DICTIONARY_SIZE = 63;
 
 int VigenereCipher::getDictionaryPosition(char letter) const{
 
-    for(int i=0;;i++){
-        if(this->dictionary[i] == letter)
-            return i;
-    }
+	int i;
 
-	return -1;
+	for(i=0; i<DICTIONARY_SIZE && dictionary[i]!=letter; i++);
+
+	return i;
 }
 
+
 string VigenereCipher::cipherText(const string& text) const{
-
-	int i, key_size, index;
-	string cripto(text);
-
-	key_size = (int) this->key.size();
-
-	for(i=0; i<(int)text.size(); i++){
-		index = ( this->getDictionaryPosition(text[i]) + this->getDictionaryPosition(key[i%key_size]) )%DICTIONARY_SIZE;
-
-		cripto[i] = dictionary[index];
-	}
-
-	return cripto;
+	return this->textOperation(text, CODE);
 }
 
 
 string VigenereCipher::decodeText(const string& cripto) const{
-	int i, key_size, index;
-	string plain_text(cripto);
+	return this->textOperation(cripto, DECODE);
+}
+
+
+string VigenereCipher::textOperation(const string& text, VigenereCipher::operation op) const{
+
+	int key_size, index;
+	string result(text);
 
 	key_size = (int) this->key.size();
 
-	for(i=0; i<(int)cripto.size(); i++){
-		index = getDictionaryPosition(cripto[i]) - getDictionaryPosition(key[i%key_size]);
+	for(int i=0; i<(int)text.size(); i++){
 
-		if( index<0 )
-			index += DICTIONARY_SIZE;
+		if( op == CODE )
+			index = ( getDictionaryPosition(text[i]) + getDictionaryPosition(key[i%key_size]) )%DICTIONARY_SIZE;
+		else
+			index = ( (getDictionaryPosition(text[i]) - getDictionaryPosition(key[i%key_size]))+DICTIONARY_SIZE )%DICTIONARY_SIZE;
 
-		plain_text[i] = dictionary[index];
+		result[i] = dictionary[index];
 	}
 
-	return plain_text;
+	return result;
 }
+
 
 

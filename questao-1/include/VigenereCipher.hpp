@@ -9,7 +9,9 @@ class VigenereCipher : Cipher{
 	private:
 		static const int DICTIONARY_SIZE;
 		char *dictionary;
+		enum operation{ CODE, DECODE };
 		int getDictionaryPosition(char letter) const;
+		string textOperation(const string& text, VigenereCipher::operation op) const;
 	public:
 		VigenereCipher(string key);
 		~VigenereCipher();

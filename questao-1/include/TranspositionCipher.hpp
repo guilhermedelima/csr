@@ -7,10 +7,14 @@ using namespace std;
 
 class TranspositionCipher : Cipher{
 	private:
-		void cipherBlock(string& block) const;
+		static const int KEY_SIZE;
+		static const int BLOCK_SIZE;
+		bool isValidKey(string key);
+		string cipherBlock(const string& block, int rows) const;
 	public:
 		TranspositionCipher(string key);
 		string cipherText(const string& text) const;
+		string decodeText(const string& cripto) const;
 };
 
 

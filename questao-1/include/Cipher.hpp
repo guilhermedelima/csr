@@ -2,8 +2,16 @@
 #define CIPHER_HPP
 
 #include <string>
+#include <exception>
 
 using namespace std;
+
+class KeyException : exception{
+	private:
+		static const char *message;
+	public:
+		const char *what() const throw();
+};
 
 class Cipher{
 	protected:
@@ -16,6 +24,5 @@ class Cipher{
 
 #include "VigenereCipher.hpp"
 #include "TranspositionCipher.hpp"
-#include "Util.hpp"
 
 #endif

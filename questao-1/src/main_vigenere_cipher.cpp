@@ -7,6 +7,11 @@
 using namespace std;
 
 int main(int argc, char *argv[]){
+
+	if( argc != 3 ){
+		cout << "Correct Usage: " << argv[0] << " <TEXT_FILE> <KEY_FILE>" << endl;
+		exit(-1);
+	}
     
 	ifstream itext;
 	ifstream ikey;
@@ -14,11 +19,6 @@ int main(int argc, char *argv[]){
 	string key;
 	string text;
 	string cripto;
-
-	if( argc != 3 ){
-		cout << "Correct Usage: " << argv[0] << " <TEXT_FILE> <KEY_FILE>" << endl;
-		exit(-1);
-	}
 
 	itext.open(argv[1]);
 	ikey.open(argv[2]);
