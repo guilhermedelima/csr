@@ -46,7 +46,7 @@ string VigenereCipher::decodeText(const string& cripto) const{
 }
 
 
-string VigenereCipher::textOperation(const string& text, VigenereCipher::operation op) const{
+string VigenereCipher::textOperation(const string& text, Cipher::operation op) const{
 
 	int key_size, index;
 	string result(text);

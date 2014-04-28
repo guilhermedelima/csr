@@ -16,6 +16,7 @@ class KeyException : exception{
 class Cipher{
 	protected:
 		string key;
+		enum operation{ CODE, DECODE };
 	public:
 		Cipher(string key);
 		virtual string cipherText(const string& text) const = 0;

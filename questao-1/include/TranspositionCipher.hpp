@@ -11,6 +11,8 @@ class TranspositionCipher : Cipher{
 		static const int BLOCK_SIZE;
 		bool isValidKey(string key);
 		string cipherBlock(const string& block, int rows) const;
+		string decodeBlock(const string& block, int rows) const;
+		string blockOperation(const string& text, Cipher::operation op) const;
 	public:
 		TranspositionCipher(string key);
 		string cipherText(const string& text) const;

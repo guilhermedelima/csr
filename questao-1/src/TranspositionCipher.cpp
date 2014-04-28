@@ -1,6 +1,5 @@
 #include "TranspositionCipher.hpp"
 #include <algorithm>
-#include <iostream>
 
 using namespace std;
 
@@ -27,11 +26,21 @@ bool TranspositionCipher::isValidKey(string key){
 
 
 string TranspositionCipher::cipherText(const string& text) const{
+	return blockOperation(text, CODE);
+}
+
+
+string TranspositionCipher::decodeText(const string& cripto) const{
+	return blockOperation(cripto, DECODE);
+}
+
+
+string TranspositionCipher::blockOperation(const string& text, Cipher::operation op) const{
 
 	int i, n_blocks, n_rows, rest;
-	string cripto;
+	string result;
 
-	cripto.reserve(text.size());
+	result.reserve(text.size());
 
 	n_blocks = (int)text.size()%BLOCK_SIZE ? (int)text.size()/BLOCK_SIZE + 1 : (int)text.size()/BLOCK_SIZE;
 
@@ -42,20 +51,13 @@ string TranspositionCipher::cipherText(const string& text) const{
 		
 		if( (rest=(int)block.size()%KEY_SIZE) ){
 				n_rows++;
-				block.append(KEY_SIZE-rest, '*');
+				block.append(KEY_SIZE-rest, ' ');
 		}
 
-		cripto.append( cipherBlock(block, n_rows) );
+		result.append( op == CODE ? cipherBlock(block, n_rows) : decodeBlock(block, n_rows));
 	}
 
-	return cripto;
-}
-
-
-//TODO
-string TranspositionCipher::decodeText(const string& cripto) const{
-
-	return cripto;
+	return result;
 }
 
 
@@ -67,12 +69,29 @@ string TranspositionCipher::cipherBlock(const string& block, int rows) const{
 	count = -1;
 	for(int j=0; j<KEY_SIZE; j++){
 		for(int i=0; i<rows; i++){
-			index = i*KEY_SIZE  + this->key[j]-'1';
+			index = i*KEY_SIZE + this->key[j]-'1';
 			cripto[++count] = block[index];
 		}
 	}
 
 	return cripto;
+}
+
+
+string TranspositionCipher::decodeBlock(const string& block, int rows) const{
+
+	int index, count;
+	string plainText(block);
+
+	count = -1;
+	for(int j=0; j<rows; j++){
+		for(int i=0; i<KEY_SIZE; i++){
+			index = (this->key[i]-'1')*rows + j;
+			plainText[++count] = block[index];
+		}
+	}
+
+	return plainText;
 }
 
 
