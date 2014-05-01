@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class VigenereCipher : Cipher{
+class VigenereCipher : public Cipher{
 	private:
 		static const int DICTIONARY_SIZE;
 		char *dictionary;

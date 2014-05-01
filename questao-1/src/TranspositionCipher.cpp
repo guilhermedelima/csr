@@ -63,14 +63,13 @@ string TranspositionCipher::blockOperation(const string& text, Cipher::operation
 
 string TranspositionCipher::cipherBlock(const string& block, int rows) const{
 
-	int index, count;
+	int index;
 	string cripto(block);
-	
-	count = -1;
+
 	for(int j=0; j<KEY_SIZE; j++){
 		for(int i=0; i<rows; i++){
-			index = i*KEY_SIZE + this->key[j]-'1';
-			cripto[++count] = block[index];
+			index = (this->key[j]-'1')*rows + i;
+			cripto[index] = block[i*KEY_SIZE + j];
 		}
 	}
 
@@ -80,14 +79,13 @@ string TranspositionCipher::cipherBlock(const string& block, int rows) const{
 
 string TranspositionCipher::decodeBlock(const string& block, int rows) const{
 
-	int index, count;
+	int index;
 	string plainText(block);
 
-	count = -1;
 	for(int j=0; j<rows; j++){
 		for(int i=0; i<KEY_SIZE; i++){
 			index = (this->key[i]-'1')*rows + j;
-			plainText[++count] = block[index];
+			plainText[j*KEY_SIZE + i] = block[index];
 		}
 	}
 

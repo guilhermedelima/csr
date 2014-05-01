@@ -7,8 +7,8 @@ RSCDIR=resources
 CC=g++
 CFLAGS=-W -Wall -pedantic -ansi -I $(INCDIR)
 
-VIGENERE=vigenere_cipher
-TRANSPOSITION=transposition_cipher
+VIGENERE=vigenere
+TRANSPOSITION=transposition
 
 _HEADER=$(foreach header,$(shell ls $(INCDIR)),$(header))
 _OBJ1=$(_HEADER:.hpp=.o) main_$(VIGENERE).o

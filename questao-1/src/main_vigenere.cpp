@@ -29,13 +29,15 @@ int main(int argc, char *argv[]){
 	itext.close();
 	ikey.close();
 
-	VigenereCipher cipher(key);
+	Cipher* cipher = new VigenereCipher(key);
 
-	cripto = cipher.cipherText(text);
+	cripto = cipher->cipherText(text);
 
 	cout << "PLAIN TEXT" << endl << text << endl << endl;
 	cout << "CRIPTO" << endl << cripto << endl << endl;
-	cout << "DECRYPTED TEXT" << endl << cipher.decodeText(cripto) << endl;
+	cout << "DECRYPTED TEXT" << endl << cipher->decodeText(cripto) << endl;
+
+	delete cipher;
 
 	return 0;
 }

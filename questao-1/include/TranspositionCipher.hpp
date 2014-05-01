@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class TranspositionCipher : Cipher{
+class TranspositionCipher : public Cipher{
 	private:
 		static const int KEY_SIZE;
 		static const int BLOCK_SIZE;
