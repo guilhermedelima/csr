@@ -7,7 +7,7 @@ const int TranspositionCipher::KEY_SIZE = 8;
 const int TranspositionCipher::BLOCK_SIZE = 64;
 
 
-TranspositionCipher::TranspositionCipher(string key) : Cipher(key){
+TranspositionCipher::TranspositionCipher(string key) : key(key){
 	if( !this->isValidKey(key) )
 		throw KeyException();
 }

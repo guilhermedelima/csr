@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
 		delete cipher;
 		delete hacker;
 
-	}catch(KeyException& e){
+	}catch(exception& e){
 		cout << e.what() << endl;
 		exit(-1);
 	}

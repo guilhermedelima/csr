@@ -1,6 +1,9 @@
 #include "TranspositionHacker.hpp"
+#include "Cipher.hpp"
 #include <algorithm>
 #include <iostream>
+
+using namespace std;
 
 const char *TranspositionHacker::MESSAGE_ERROR = "CANT BREAK THIS CIPHER TEXT";
 

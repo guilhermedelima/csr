@@ -2,7 +2,7 @@
 
 using namespace std;
 
-VigenereCipher::VigenereCipher(string key) : Cipher(key){
+VigenereCipher::VigenereCipher(string key) : key(key){
 
 	this->dictionary = new char[DICTIONARY_SIZE];
 

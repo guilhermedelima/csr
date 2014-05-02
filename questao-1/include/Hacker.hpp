@@ -1,9 +1,10 @@
 #ifndef HACKER_HPP
 #define HACKER_HPP
 
-#include "Cipher.hpp"
 #include <vector>
 #include <string>
+
+using namespace std;
 
 class Hacker{
 	public:

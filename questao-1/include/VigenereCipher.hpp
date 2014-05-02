@@ -1,5 +1,5 @@
-#ifndef VIGENERE_HPP
-#define VIGENERE_HPP
+#ifndef VIGENERE_CIPHER_HPP
+#define VIGENERE_CIPHER_HPP
 
 #include "Cipher.hpp"
 
@@ -7,6 +7,7 @@ using namespace std;
 
 class VigenereCipher : public Cipher{
 	private:
+		string key;
 		static const int DICTIONARY_SIZE;
 		char *dictionary;
 		int getDictionaryPosition(char letter) const;

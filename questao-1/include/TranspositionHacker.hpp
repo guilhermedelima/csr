@@ -3,6 +3,8 @@
 
 #include "Hacker.hpp"
 
+using namespace std;
+
 
 class TranspositionHacker : public Hacker{
 	private:

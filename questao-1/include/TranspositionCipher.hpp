@@ -1,5 +1,5 @@
-#ifndef TRANSPOSITION_HPP
-#define TRANSPOSITION_HPP
+#ifndef TRANSPOSITION_CIPHER_HPP
+#define TRANSPOSITION_CIPHER_HPP
 
 #include "Cipher.hpp"
 
@@ -7,6 +7,7 @@ using namespace std;
 
 class TranspositionCipher : public Cipher{
 	private:
+		string key;
 		static const int KEY_SIZE;
 		static const int BLOCK_SIZE;
 		bool isValidKey(string key);
