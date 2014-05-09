@@ -5,7 +5,7 @@ OBJDIR=obj
 RSCDIR=resources
 
 CC=g++
-CFLAGS=-W -Wall -pedantic -ansi -I $(INCDIR)
+CFLAGS=-W -Wall -pedantic -ansi -I $(INCDIR) -std=c++0x
 
 VIGENERE=vigenere
 TRANSPOSITION=transposition

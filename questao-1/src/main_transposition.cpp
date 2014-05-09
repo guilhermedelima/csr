@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
 
 	try{	
 		cipher = new TranspositionCipher(key);
-		hacker = new TranspositionHacker();
+		hacker = new TranspositionHacker(dic);
 
 		cripto = cipher->cipherText(text);
 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
 		cout << "P.TEXT: " << cipher->decodeText(cripto) << endl;
 
 		cout << endl << "TEST TRANSPOSITION HACKER" << endl;
-		cout << hacker->breakCipher(cripto, dic) << endl;
+		cout << hacker->breakCipher(cripto) << endl;
 
 		delete cipher;
 		delete hacker;

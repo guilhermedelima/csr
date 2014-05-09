@@ -6,6 +6,7 @@ VigenereCipher::VigenereCipher(string key) : key(key){
 
 	this->dictionary = new char[DICTIONARY_SIZE];
 
+	//Dicionário para 63 palavras
 	for(int i=0; i<26; i++){
 		this->dictionary[i] = i + 'a';
 		this->dictionary[i+26] = i + 'A';
@@ -16,6 +17,11 @@ VigenereCipher::VigenereCipher(string key) : key(key){
 	}
 
 	this->dictionary[62] = ' ';
+
+//	//Dicionário para Letras maiusculas
+//	for(int i=0; i<26; i++){
+//		this->dictionary[i] = i + 'A';
+//	}
 }
 
 VigenereCipher::~VigenereCipher(){
@@ -24,6 +30,7 @@ VigenereCipher::~VigenereCipher(){
 
 
 const int VigenereCipher::DICTIONARY_SIZE = 63;
+//const int VigenereCipher::DICTIONARY_SIZE = 26;
 
 
 int VigenereCipher::getDictionaryPosition(char letter) const{

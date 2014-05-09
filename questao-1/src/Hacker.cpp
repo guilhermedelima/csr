@@ -1,4 +1,3 @@
 #include "Hacker.hpp"
 
-Hacker::Hacker(){
-}
+const char *Hacker::MESSAGE_ERROR = "CANT BREAK THIS CIPHER TEXT";

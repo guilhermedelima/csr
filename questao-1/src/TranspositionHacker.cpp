@@ -5,14 +5,11 @@
 
 using namespace std;
 
-const char *TranspositionHacker::MESSAGE_ERROR = "CANT BREAK THIS CIPHER TEXT";
-
-
-TranspositionHacker::TranspositionHacker() : Hacker(){
+TranspositionHacker::TranspositionHacker(const vector<string>& dic) : dictionary(dic){
 }
 
 
-string TranspositionHacker::breakCipher(const string cipherText, const vector<string>& dictionary) const{
+string TranspositionHacker::breakCipher(const string& cipherText) const{
 
 	int i;
 	bool wasFound;

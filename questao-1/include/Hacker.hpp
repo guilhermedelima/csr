@@ -7,11 +7,13 @@
 using namespace std;
 
 class Hacker{
+	protected:
+		static const char *MESSAGE_ERROR;
 	public:
-		Hacker();
-		virtual string breakCipher(const string cipherText, const vector<string>& dictionary) const = 0;
+		virtual string breakCipher(const string& cipherText) const = 0;
 };
 
 #include "TranspositionHacker.hpp"
+#include "VigenereHacker.hpp"
 
 #endif

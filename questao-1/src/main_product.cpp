@@ -9,37 +9,30 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 
-	if( argc != 5 ){
-		cout << "Correct Usage: " << argv[0] << " <TEXT_FILE> <VIGENERE_KEY> <TRANSPOSITION_KEY> <DICTIONARY>";
+	if( argc != 4 ){
+		cout << "Correct Usage: " << argv[0] << " <TEXT_FILE> <VIGENERE_KEY> <TRANSPOSITION_KEY>";
 		cout << endl;
 		exit(-1);
 	}
 
 	Cipher *cipher;
 	fstream iVigenereKey, iTranspositionKey;
-	fstream iText, iDic;
+	fstream iText;
 
 	string text, vigenereKey, transpositionKey, cripto;
 	string word;
-	vector<string> dictionary;
 	
 	iText.open(argv[1]);
 	iVigenereKey.open(argv[2]);
 	iTranspositionKey.open(argv[3]);
-	iDic.open(argv[4]);
 
 	getline(iText, text);
 	getline(iVigenereKey, vigenereKey);
 	getline(iTranspositionKey, transpositionKey);
 
-	while( getline(iDic, word) ){
-		dictionary.push_back(word);
-	}
-
 	iText.close();
 	iVigenereKey.close();
 	iTranspositionKey.close();
-	iDic.close();
 
 	try{
 		cipher = new ProductCipher(transpositionKey, vigenereKey);

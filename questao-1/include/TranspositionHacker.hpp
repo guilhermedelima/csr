@@ -8,10 +8,10 @@ using namespace std;
 
 class TranspositionHacker : public Hacker{
 	private:
-		static const char *MESSAGE_ERROR;
+		const vector<string> dictionary;
 	public:
-		TranspositionHacker();
-		string breakCipher(const string cipherText, const vector<string>& dictionary) const;
+		TranspositionHacker(const vector<string>& dic);
+		string breakCipher(const string& cipherText) const;
 
 };
 
