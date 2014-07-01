@@ -82,8 +82,59 @@ public class RSAUtil {
 		return new BigInteger(builder.toString(), 2);
 	}
 	
-	public static boolean millerRabinTest(BigInteger num){
+	public static boolean millerRabinTest(BigInteger num, int iteracao){
+		
+		BigInteger ZERO = new BigInteger("0");
+		BigInteger UM = new BigInteger("1");
+		BigInteger DOIS = new BigInteger("2");
+		
+		if(num.compareTo(ZERO) == 0 || num.compareTo(UM) == 0)
+			return false;
+		
+		if(num.compareTo(DOIS) == 0)
+			return true;
+					
+		if(num.mod(DOIS).compareTo(ZERO) == 0)
+			return false;
+		
+		BigInteger s = num.subtract(UM);
+		while(s.mod(DOIS).compareTo(ZERO) == 0){
+			s = s.divide(DOIS);
+		}
+		
+		for(int i = 0; i < iteracao; i++){
+			BigInteger r = ;//TODO Numero randomico positivo 
+			
+            BigInteger a = r.mod(num.subtract(UM)).add(UM); 
+            BigInteger temp = s;
+            
+            BigInteger mod = modPow(a, temp, num);
+            
+            while (temp.compareTo(num.subtract(UM)) != 0 && mod.compareTo(UM) != 0 && mod.compareTo(num.subtract(UM)) != 0)
+            {
+                mod = mulMod(mod, mod, num);
+                temp = temp.multiply(DOIS);
+            }
+            if(mod.compareTo(num.subtract(UM)) != 0 && temp.mod(DOIS).compareTo(ZERO) != 0)
+                return false;
+		}
+		
 		return true;
+	}
+	
+	private static BigInteger modPow(BigInteger a, BigInteger b, BigInteger c){
+		BigInteger res = new BigInteger("1");
+		
+        for (BigInteger i = new BigInteger("0"); i.compareTo(b) < 0; i.add(new BigInteger("1")))
+        {
+            res = res.multiply(a);
+            res = res.mod(c);
+        }
+        return res.mod(c);
+	}
+	
+	public static BigInteger mulMod(BigInteger a, BigInteger b, BigInteger mod){
+		return a.multiply(b).mod(mod);	
 	}
 	
 	/* Gerador de números randômicos verdadeiros (Entropia -> Usar /dev/random) */
@@ -119,5 +170,5 @@ public class RSAUtil {
 
 		return bigNum;
 	}
-
+	
 }
