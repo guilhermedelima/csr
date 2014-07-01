@@ -15,7 +15,7 @@ public class RSA {
     
     public RSA() {
     	
-    	BigInteger random = RSAUtil.gerarRandomico(); //gera um numero aleatório seguro
+    	BigInteger random = RSAUtil.getLinuxRandomNumber(100); //gera um numero aleatório seguro
     	
     	//TODO
     	this.p = new BigInteger("0");
