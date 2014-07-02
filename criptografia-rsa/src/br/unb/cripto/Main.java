@@ -20,16 +20,17 @@ public class Main {
 		String message;
 		
 		message = readMessage();
+		
 		numberGenerator = new RandomNumbers();
 		
 		service = new RSA(numberGenerator, KEY_SIZE);
 		cripto = service.cipherText(message);
 		
 		System.out.println("Plain Text");
-		System.out.println(message + '\n');
+		System.out.println(message + "\n");
 		
 		System.out.println("Cripto RSA");
-		System.out.println(cripto);
+		System.out.println(cripto + "\n");
 		
 		System.out.println("Decode Text");
 		System.out.println(service.decodeText(cripto));

@@ -28,13 +28,13 @@ public class RSA {
     	this.publicKey = e;
     	this.privateKey = d;
     	
-//    	System.out.println("RSA");
-//    	System.out.println("p: " +p);
-//    	System.out.println("q: " +q);
-//    	System.out.println("n: " +n);
-//    	System.out.println("phiN: " +phiN);
-//    	System.out.println("e: " +e);
-//    	System.out.println("d: " +d);
+    	System.out.println("RSA");
+    	System.out.println("p: " +p);
+    	System.out.println("q: " +q);
+    	System.out.println("n: " +n);
+    	System.out.println("phiN: " +phiN);
+    	System.out.println("e: " +e);
+    	System.out.println("d: " +d+ "\n");
 	}
 	
 	public BigInteger cipherText(String plainText){
@@ -46,11 +46,7 @@ public class RSA {
 	}
 	
 	public String decodeText(BigInteger criptoMessage){
-		String message;
-		
-		message = new String(criptoMessage.modPow(privateKey, n).toByteArray());
-		
-		return message;
+		return new String(criptoMessage.modPow(privateKey, n).toByteArray());
 	}
 	
 }

@@ -11,11 +11,11 @@ public class RandomNumbers {
 	//	private static final String LRNG = "/dev/random";
 
 	private static final Integer BUFFER_SIZE = 1024;
-	private static final Integer PRIME_SIZE = 4;
-	private static final Integer SEED_SIZE = 4;
-	private static final Integer PRIME_PRECISION = 5;
+	private static final Integer PRIME_SIZE = 32;
+	private static final Integer SEED_SIZE = 64;
+	private static final Integer PRIME_PRECISION = 20;
 	
-	private BigInteger TWO, FOUR, THREE;
+	private BigInteger TWO, FOUR, THREE; 
 	
 	public RandomNumbers(){ 
 		TWO = new BigInteger("2");
@@ -28,9 +28,12 @@ public class RandomNumbers {
 		BigInteger n, p, q, seed; 
 		BigInteger x;
 		StringBuilder builder;
+		int nBits;
 
+		nBits = nBytes * Byte.SIZE;
+		
 		p = getPrimeBBS();
-		q = getPrimeBBS();
+		q = getPrimeBBS();			
 
 		n = p.multiply(q);
 
@@ -41,7 +44,7 @@ public class RandomNumbers {
 		builder = new StringBuilder();
 		x = seed.multiply(seed).mod(n);
 
-		for(int i=0; i<nBytes; i++){
+		for(int i=0; i<nBits; i++){
 			x = x.multiply(x).mod(n); 
 			builder.append( x.mod(TWO) );
 		}
@@ -59,7 +62,7 @@ public class RandomNumbers {
 		do{
 			prime = getLinuxRandomNumber(nBytes);
 
-		}while( !millerRabinTest(prime) );
+		}while( !millerRabinTest(prime, nBytes) );
 
 		return prime;
 	}
@@ -74,54 +77,70 @@ public class RandomNumbers {
 		do{
 			prime = getLinuxRandomNumber(PRIME_SIZE);
 
-		}while(prime.mod(FOUR).compareTo(THREE) != 0 || !millerRabinTest(prime));
+		}while(prime.mod(FOUR).compareTo(THREE) != 0 || !millerRabinTest(prime, PRIME_SIZE));
 
 		return prime;
 	}
 	
 	/*
 	 * Teste de Miller-Rabin para verificar se um núemro é primo
+	 * Realiza a quantidade de testes determinada por PRIME_PRECISION
 	 */	
-	private boolean millerRabinTest(BigInteger num){
-
-		if(num.compareTo(BigInteger.ZERO) == 0 || num.compareTo(BigInteger.ONE) == 0)
-			return false;
+	private boolean millerRabinTest(BigInteger num, int nBytes){
 		
-		if(num.compareTo(TWO) == 0)
+		BigInteger a;
+		
+		if(num.equals(TWO))
 			return true;
-					
-		if(num.mod(TWO).compareTo(BigInteger.ZERO) == 0)
+		
+		if( num.equals(BigInteger.ZERO) || num.equals(BigInteger.ONE) || !num.mod(TWO).equals(BigInteger.ONE))
 			return false;
-		
-		BigInteger s = num.subtract(BigInteger.ONE);
-		while(s.mod(TWO).compareTo(BigInteger.ZERO) == 0){
-			s = s.divide(TWO);
-		}
-		
-		for(int i = 0; i < PRIME_PRECISION; i++){
-			BigInteger r = getLinuxRandomNumber(PRIME_SIZE);
+
+		for(int i=0; i<PRIME_PRECISION; i++){
 			
 			do{
-				r = getLinuxRandomNumber(PRIME_SIZE);
-			}while( r.compareTo(num) >= 0);
+				a = getLinuxRandomNumber(nBytes);
+				
+			}while( num.subtract(BigInteger.ONE).compareTo(a) <= 0 || a.compareTo(BigInteger.ONE) <= 0);
 			
-            BigInteger a = r.mod(num.subtract(BigInteger.ONE)).add(BigInteger.ONE); 
-            BigInteger temp = s;
-            
-            BigInteger mod = MathUtil.modPow(a, temp, num);
-            
-            while (temp.compareTo(num.subtract(BigInteger.ONE)) != 0 && mod.compareTo(BigInteger.ONE) != 0 
-            		&& mod.compareTo(num.subtract(BigInteger.ONE)) != 0)
-            {
-                mod = MathUtil.mulMod(mod, mod, num);
-                temp = temp.multiply(TWO);
-            }
-            
-            if(mod.compareTo(num.subtract(BigInteger.ONE)) != 0 && temp.mod(TWO).compareTo(BigInteger.ZERO) != 0)
-                return false;
+			if(checkPrimeProperties(num, a))
+				return false;
 		}
 		
 		return true;
+//		return num.isProbablePrime(PRIME_PRECISION);
+	}
+	
+	/*
+	 * Teste para verificar as duas propriedades de um núemro primo com a => (1 < a < n-1) 
+	 * Escreve número na forma (n-1) = 2^k * q e faz os testes
+	 */
+	private boolean checkPrimeProperties(BigInteger num, BigInteger a){
+		
+		BigInteger k, q;
+		
+		k = BigInteger.ONE;
+		q = num.subtract(BigInteger.ONE).divide(TWO);
+		
+		while( q.mod(TWO).equals(BigInteger.ZERO) ){
+			q = q.divide(TWO);
+			k.add(BigInteger.ONE);
+		}
+		
+		/* Teste a^q mod n = 1 */
+		if( a.modPow(q, num).equals(BigInteger.ONE) )
+			return true;
+		
+		/* Testa a^((2^i)*q) mod n = -1 para 0...k-1  */
+		for(BigInteger i=BigInteger.ZERO, exp = q; i.compareTo(k)<0; i = i.add(BigInteger.ONE)){
+			
+			if( a.modPow(exp, num).equals(num.subtract(BigInteger.ONE)) )
+				return true;
+					
+			exp = exp.multiply(TWO);
+		}
+		
+		return false;
 	}
 
 	/* 
