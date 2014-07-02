@@ -13,7 +13,7 @@ public class RandomNumbers {
 	private static final Integer BUFFER_SIZE = 1024;
 	private static final Integer PRIME_SIZE = 32;
 	private static final Integer SEED_SIZE = 64;
-	private static final Integer PRIME_PRECISION = 20;
+	private static final Integer PRIME_PRECISION = 10;
 	
 	private BigInteger TWO, FOUR, THREE; 
 	
@@ -103,12 +103,11 @@ public class RandomNumbers {
 				
 			}while( num.subtract(BigInteger.ONE).compareTo(a) <= 0 || a.compareTo(BigInteger.ONE) <= 0);
 			
-			if(checkPrimeProperties(num, a))
+			if(!checkPrimeProperties(num, a))
 				return false;
 		}
 		
 		return true;
-//		return num.isProbablePrime(PRIME_PRECISION);
 	}
 	
 	/*
@@ -124,7 +123,7 @@ public class RandomNumbers {
 		
 		while( q.mod(TWO).equals(BigInteger.ZERO) ){
 			q = q.divide(TWO);
-			k.add(BigInteger.ONE);
+			k = k.add(BigInteger.ONE);
 		}
 		
 		/* Teste a^q mod n = 1 */
@@ -134,8 +133,9 @@ public class RandomNumbers {
 		/* Testa a^((2^i)*q) mod n = -1 para 0...k-1  */
 		for(BigInteger i=BigInteger.ZERO, exp = q; i.compareTo(k)<0; i = i.add(BigInteger.ONE)){
 			
-			if( a.modPow(exp, num).equals(num.subtract(BigInteger.ONE)) )
+			if( a.modPow(exp, num).equals(num.subtract(BigInteger.ONE)) ){
 				return true;
+			}
 					
 			exp = exp.multiply(TWO);
 		}

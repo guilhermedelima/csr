@@ -20,8 +20,9 @@ public class Main {
 		String message;
 		
 		message = readMessage();
-		
 		numberGenerator = new RandomNumbers();
+		
+		System.out.println("Calculating prime numbers of RSA..." + '\n');
 		
 		service = new RSA(numberGenerator, KEY_SIZE);
 		cripto = service.cipherText(message);
