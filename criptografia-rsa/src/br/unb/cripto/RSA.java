@@ -8,12 +8,19 @@ public class RSA {
     private BigInteger publicKey;
     private BigInteger privateKey; 
     
+    public RSA(){
+    	
+    }
+    
     public RSA(RandomNumbers numberGenerator, int keySize) {
     	
     	BigInteger e, d;
     	
-    	p = numberGenerator.getLargePrime(keySize);
-    	q = numberGenerator.getLargePrime(keySize);
+//    	p = numberGenerator.getLargePrime(keySize);
+//    	q = numberGenerator.getLargePrime(keySize);
+    	
+    	p = numberGenerator.getPrimeBBS(keySize);
+    	q = numberGenerator.getPrimeBBS(keySize);
     	
     	n = p.multiply(q);
     	phiN = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
@@ -37,16 +44,62 @@ public class RSA {
     	System.out.println("d: " +d+ "\n");
 	}
 	
-	public BigInteger cipherText(String plainText){
-		BigInteger messageAsNumber;
-		
-		messageAsNumber = new BigInteger(plainText.getBytes());
-		
+	public BigInteger cipherText(BigInteger messageAsNumber){
 		return messageAsNumber.modPow(publicKey, n);
 	}
 	
-	public String decodeText(BigInteger criptoMessage){
-		return new String(criptoMessage.modPow(privateKey, n).toByteArray());
+	public BigInteger decodeText(BigInteger criptoMessage){
+		return criptoMessage.modPow(privateKey, n);
 	}
+
+	public BigInteger getP() {
+		return p;
+	}
+
+	public void setP(BigInteger p) {
+		this.p = p;
+	}
+
+	public BigInteger getQ() {
+		return q;
+	}
+
+	public void setQ(BigInteger q) {
+		this.q = q;
+	}
+
+	public BigInteger getN() {
+		return n;
+	}
+
+	public void setN(BigInteger n) {
+		this.n = n;
+	}
+
+	public BigInteger getPhiN() {
+		return phiN;
+	}
+
+	public void setPhiN(BigInteger phiN) {
+		this.phiN = phiN;
+	}
+
+	public BigInteger getPublicKey() {
+		return publicKey;
+	}
+
+	public void setPublicKey(BigInteger publicKey) {
+		this.publicKey = publicKey;
+	}
+
+	public BigInteger getPrivateKey() {
+		return privateKey;
+	}
+
+	public void setPrivateKey(BigInteger privateKey) {
+		this.privateKey = privateKey;
+	}
+	
+	
 	
 }

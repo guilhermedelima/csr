@@ -32,8 +32,8 @@ public class RandomNumbers {
 
 		nBits = nBytes * Byte.SIZE;
 		
-		p = getPrimeBBS();
-		q = getPrimeBBS();			
+		p = getPrimeBBS(PRIME_SIZE);
+		q = getPrimeBBS(PRIME_SIZE);			
 
 		n = p.multiply(q);
 
@@ -70,14 +70,14 @@ public class RandomNumbers {
 	/*
 	 * Gerar número primo para método Blum Blum Shub
 	 */
-	private BigInteger getPrimeBBS(){
+	public BigInteger getPrimeBBS(int nBytes){
 
 		BigInteger prime;
 
 		do{
-			prime = getLinuxRandomNumber(PRIME_SIZE);
+			prime = getLinuxRandomNumber(nBytes);
 
-		}while(prime.mod(FOUR).compareTo(THREE) != 0 || !millerRabinTest(prime, PRIME_SIZE));
+		}while(prime.mod(FOUR).compareTo(THREE) != 0 || !millerRabinTest(prime, nBytes));
 
 		return prime;
 	}
