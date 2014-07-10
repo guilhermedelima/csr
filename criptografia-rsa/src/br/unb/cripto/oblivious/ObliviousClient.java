@@ -154,7 +154,7 @@ public class ObliviousClient {
 		 * Alice e Bob trocam B (garantia para caso de não fatoração)
 		 */
 		System.out.println("8 Step");
-		System.out.println("Receiving Bb from Bob");
+		System.out.println("Receiving Bb from Bob\n");
 		Bb = (BigInteger) ois.readObject();
 		
 		StringBuilder xorString = new StringBuilder();
@@ -165,8 +165,6 @@ public class ObliviousClient {
 		
 		Ba = SA.xor( new BigInteger(xorString.toString(), 2) );
 		oos.writeObject(Ba);
-		
-		System.out.println(Bb + "\n");
 		
 		/*
 		 * 9 Passo

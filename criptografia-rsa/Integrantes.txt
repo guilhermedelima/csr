@@ -1,5 +1,0 @@
-Trabalho de Criptografia - RSA
-
-Guilherme de Lima Bernardes - 09/0115350
-Tiago Gomes Pereira - 09/0134222
-Nilton César Campos Araruna - 090127421
